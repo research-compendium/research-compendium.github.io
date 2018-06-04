@@ -1,0 +1,65 @@
+html, body {
+  height: 100%;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push, #footer {
+  height: 60px;
+}
+
+#footer {
+}
+
+#centre{
+	width:900px;
+  margin:40px auto;
+}
+
+.centered {
+	width:900px;
+	margin:0px auto;
+}
+
+#header {
+
+}
+
+h1 {
+	font-family:Georgia, serif;
+	font-weight:lighter;
+}
+
+h3 {
+	font-family:Georgia, serif;
+	font-weight:lighter;
+	font-size:1.3em;
+  padding-top: 10px;
+  margin: 0px;
+}
+
+p, ul, ul li, ol, ol li, blockquote{
+	font-family: helvetica, arial, sans-serif;
+	font-size: 1em;
+	line-height: 1.3em;
+}
+
+.count {
+  display: inline-block;
+  padding: 2px 6px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  color: #484851;
+  background-color: rgba(20,30,30,0.08);
+  border-radius: 20px;
+}
