@@ -46,10 +46,14 @@ h3 {
   margin: 0px;
 }
 
-p, ul, ul li, ol, ol li, blockquote{
+p, ul, ul li, ol, ol li, blockquote {
 	font-family: helvetica, arial, sans-serif;
 	font-size: 1em;
 	line-height: 1.3em;
+}
+
+code {
+  font-size: 120%;
 }
 
 .count {
