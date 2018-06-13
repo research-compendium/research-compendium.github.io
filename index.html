@@ -17,8 +17,9 @@
          They can be published on different platforms using the label (or tag, community, ...) <strong><code>research-compendium</code></strong>.
         </p>
       <ul>
-        <li>GitHub &middot; <a href="https://github.com/topics/research-compendium/" target="_blank">https://github.com/topics/research-compendium/</a> <a href="https://github.com/topics/research-compendium/" target="_blank"><span id="hits_github" class="count">..</span></a></li>
-        <li>Zenodo &middot; <a href="https://zenodo.org/communities/research-compendium/" target="_blank">https://zenodo.org/communities/research-compendium/</a> <a href="https://zenodo.org/communities/research-compendium/" target="_blank"><span id="hits_zenodo" class="count">..</span></a></li>
+        <li><strong>GitHub</strong> &middot; <a href="https://github.com/topics/research-compendium/" target="_blank">https://github.com/topics/research-compendium/</a> <a href="https://github.com/topics/research-compendium/" target="_blank"><span id="hits_github" class="count">..</span></a></li>
+        <li><strong>Zenodo</strong> &middot; <a href="https://zenodo.org/communities/research-compendium/" target="_blank">https://zenodo.org/communities/research-compendium/</a> <a href="https://zenodo.org/communities/research-compendium/" target="_blank"><span id="hits_zenodo" class="count">..</span></a></li>
+        <li><strong>OSF</strong> &middot; <a href="https://osf.io/search/?q=tags:research-compendium" target="_blank">https://osf.io/search/?q=tags:research-compendium</a> <a href="https://osf.io/search/?q=tags:research-compendium" target="_blank"><span id="hits_osf" class="count">..</span></a></li>
       </ul>
 
       <h3>Resources</h3>
@@ -63,6 +64,8 @@
   </div>
   
   <script>
+    // based on http://youmightnotneedjquery.com/
+
     var request_zenodo = new XMLHttpRequest();
     request_zenodo.open('GET', 'https://zenodo.org/api/records/?page=1&size=1&communities=research-compendium', true);
 
@@ -85,28 +88,55 @@
 
     request_zenodo.send();
   </script>
-    <script>
-        var request_github = new XMLHttpRequest();
-        request_github.open('GET', 'https://api.github.com/search/repositories?q=topic:research-compendium&per_page=1', true);
-    
-        request_github.onload = function() {
-          if (request_github.status >= 200 && request_github.status < 400) {
-            var data = JSON.parse(request_github.responseText);
-            hits_github = data.total_count;
-            console.log('Retrieved compendium count from GitHub: ' + hits_github);
-    
-            el = document.getElementById('hits_github');
-            el.textContent = hits_github;
-          } else {
-            console.log('Error getting compendium count from GitHub');
-          }
-        };
-    
-        request_github.onerror = function() {
+
+  <script>
+      var request_github = new XMLHttpRequest();
+      request_github.open('GET', 'https://api.github.com/search/repositories?q=topic:research-compendium&per_page=1', true);
+  
+      request_github.onload = function() {
+        if (request_github.status >= 200 && request_github.status < 400) {
+          var data = JSON.parse(request_github.responseText);
+          hits_github = data.total_count;
+          console.log('Retrieved compendium count from GitHub: ' + hits_github);
+  
+          el = document.getElementById('hits_github');
+          el.textContent = hits_github;
+        } else {
           console.log('Error getting compendium count from GitHub');
-        };
+        }
+      };
+  
+      request_github.onerror = function() {
+        console.log('Error getting compendium count from GitHub');
+      };
+  
+      request_github.send();
+    </script>
+
+    <script>
+      // https://api.osf.io/v2/nodes/?filter%5Btags%5D=research-compendium
+      var request_osf = new XMLHttpRequest();
+      request_osf.open('GET', 'https://cors-anywhere.herokuapp.com/https://api.osf.io/v2/nodes/?fields%5Bnodes%5D=id&filter%5Btags%5D=research-compendium&format=json', true);
     
-        request_github.send();
-      </script>
+      request_osf.onload = function() {
+        if (request_osf.status >= 200 && request_osf.status < 400) {
+          var data = JSON.parse(request_osf.responseText);
+          hits_osf = data.links.meta.total;
+
+          console.log('Retrieved compendium count from OSF: ' + hits_osf);
+  
+          el = document.getElementById('hits_osf');
+          el.textContent = hits_osf;
+        } else {
+          console.log('Error getting compendium count from OSF');
+        }
+      };
+  
+      request_osf.onerror = function() {
+        console.log('Error getting compendium count from OSF');
+      };
+  
+      request_osf.send();
+    </script>
 </body>
 </html>
