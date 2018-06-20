@@ -20,6 +20,7 @@
         <li><strong>GitHub</strong> &middot; <a href="https://github.com/topics/research-compendium/" target="_blank">https://github.com/topics/research-compendium/</a> <a href="https://github.com/topics/research-compendium/" target="_blank"><span id="hits_github" class="count">..</span></a></li>
         <li><strong>Zenodo</strong> &middot; <a href="https://zenodo.org/communities/research-compendium/" target="_blank">https://zenodo.org/communities/research-compendium/</a> <a href="https://zenodo.org/communities/research-compendium/" target="_blank"><span id="hits_zenodo" class="count">..</span></a></li>
         <li><strong>OSF</strong> &middot; <a href="https://osf.io/search/?q=tags:research-compendium" target="_blank">https://osf.io/search/?q=tags:research-compendium</a> <a href="https://osf.io/search/?q=tags:research-compendium" target="_blank"><span id="hits_osf" class="count">..</span></a></li>
+        <li><strong>GitLab</strong> &middot; <a href="https://gitlab.com/search?search=research-compendium" target="_blank">https://gitlab.com/search?search=research-compendium</a> <a href="https://gitlab.com/search?search=research-compendiu" target="_blank"><span id="hits_gitlab" class="count">..</span></a></li>
       </ul>
 
       <h3>Resources</h3>
@@ -40,7 +41,7 @@
               <strong>"ResearchCompendia.org:  Cyberinfrastructure for Reproducibility and Collaboration in Computational Science."</strong> Computing in Science &amp; Engineering 17 (1): 12–19. doi:<a href="10.1109/MCSE.2015.18">10.1109/MCSE.2015.18</a>
               (<a href="http://researchcompendia.org/" target="_blank">http://researchcompendia.org/</a>, <a href="https://github.com/researchcompendia">https://github.com/researchcompendia</a></li>
             <li><strong><code><a href="https://github.com/ropensci/rrrpkg" target="_blank">rrrpkg</a></code></strong> (2015)</li>
-            <li>Chirigati, Fernando, R&eacute;emi Rampin, Dennis Shasha, and Juliana Freire. 2016.
+            <li>Chirigati, Fernando, R&eacute;mi Rampin, Dennis Shasha, and Juliana Freire. 2016.
               <strong>"ReproZip: Computational Reproducibility with Ease."</strong> In Proceedings of the 2016 International Conference on Management of Data, 2085–8. SIGMOD '16. New York, NY, USA: ACM. doi:<a href="10.1145/2882903.2899401">10.1145/2882903.2899401</a>; <a href="https://www.reprozip.org/">https://www.reprozip.org/</a></li>
             <li>Gentleman, Robert, and Duncan Temple Lang. 2007.
               <strong>"Statistical Analyses and Reproducible Research."</strong> Journal of Computational and Graphical Statistics 16 (1): 1–23. doi:<a href="10.1198/106186007X178663">10.1198/106186007X178663</a></li>
@@ -78,7 +79,7 @@
         el = document.getElementById('hits_zenodo');
         el.textContent = hits_zenodo;
       } else {
-        console.log('Error getting compendium count from Zenodo');
+        console.log('Error getting compendium count from Zenodo', request_zenodo.status);
       }
     };
 
@@ -102,7 +103,7 @@
           el = document.getElementById('hits_github');
           el.textContent = hits_github;
         } else {
-          console.log('Error getting compendium count from GitHub');
+          console.log('Error getting compendium count from GitHub', request_github.status);
         }
       };
   
@@ -128,7 +129,7 @@
           el = document.getElementById('hits_osf');
           el.textContent = hits_osf;
         } else {
-          console.log('Error getting compendium count from OSF');
+          console.log('Error getting compendium count from OSF', request_osf.status);
         }
       };
   
@@ -138,5 +139,29 @@
   
       request_osf.send();
     </script>
+    <script>
+      var request_gitlab = new XMLHttpRequest();
+      request_gitlab.open('GET', 'https://gitlab.com/api/v4/projects?search=research-compendium', true);
+
+      request_gitlab.onload = function() {
+        if (request_gitlab.status >= 200 && request_gitlab.status < 400) {
+          hits_gitlab = request_gitlab.getResponseHeader('X-Total');
+
+          console.log('Retrieved compendium count from GitLab: ' + hits_gitlab);
+
+          el = document.getElementById('hits_gitlab');
+          el.textContent = hits_gitlab;
+        } else {
+          console.log('Error getting compendium count from GitLab', request_gitlab.status);
+        }
+      };
+
+      request_gitlab.onerror = function() {
+        console.log('Error getting compendium count from GitLab');
+      };
+
+      request_gitlab.send();
+    </script>
+
 </body>
 </html>
