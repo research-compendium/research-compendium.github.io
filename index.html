@@ -14,13 +14,13 @@
 	  <div id="centre">
 	    <h1>Research Compendium&nbsp;<img src="rc-logo.png" height="40" style="margin: 0px 0px -9px 18px;" /></h1>
       <p>A research compendium accompanies a scientific publication by providing data, code, and documentation for reproducing a scientific workflow.
-         They can be published on different platforms using the label (or tag, community, ...) <strong><code>research-compendium</code></strong>.
+         They can be published on different platforms using the label (or tag, community, ...) <strong><code>research-compendium</code></strong> (GitHub, Zenodo, OSF) or the term "research compendium" in the description (GitLab).
         </p>
       <ul>
         <li><strong>GitHub</strong> &middot; <a href="https://github.com/topics/research-compendium/" target="_blank">https://github.com/topics/research-compendium/</a> <a href="https://github.com/topics/research-compendium/" target="_blank"><span id="hits_github" class="count">..</span></a></li>
         <li><strong>Zenodo</strong> &middot; <a href="https://zenodo.org/communities/research-compendium/" target="_blank">https://zenodo.org/communities/research-compendium/</a> <a href="https://zenodo.org/communities/research-compendium/" target="_blank"><span id="hits_zenodo" class="count">..</span></a></li>
         <li><strong>OSF</strong> &middot; <a href="https://osf.io/search/?q=tags:research-compendium" target="_blank">https://osf.io/search/?q=tags:research-compendium</a> <a href="https://osf.io/search/?q=tags:research-compendium" target="_blank"><span id="hits_osf" class="count">..</span></a></li>
-        <li><strong>GitLab</strong> &middot; <a href="https://gitlab.com/search?search=research-compendium" target="_blank">https://gitlab.com/search?search=research-compendium</a> <a href="https://gitlab.com/search?search=research-compendiu" target="_blank"><span id="hits_gitlab" class="count">..</span></a></li>
+        <li><strong>GitLab</strong> &middot; <a href="https://gitlab.com/search?search=research compendium" target="_blank">https://gitlab.com/search?search=research-compendium</a> <a href="https://gitlab.com/search?search=research-compendiu" target="_blank"><span id="hits_gitlab" class="count">..</span></a></li>
       </ul>
 
       <h3>Resources</h3>
@@ -141,7 +141,7 @@
     </script>
     <script>
       var request_gitlab = new XMLHttpRequest();
-      request_gitlab.open('GET', 'https://gitlab.com/api/v4/projects?search=research-compendium', true);
+      request_gitlab.open('GET', 'https://gitlab.com/api/v4/projects?search=research compendium', true);
 
       request_gitlab.onload = function() {
         if (request_gitlab.status >= 200 && request_gitlab.status < 400) {
