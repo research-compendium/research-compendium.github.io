@@ -19,7 +19,8 @@
         <li><strong>GitHub</strong> &middot; <a href="https://github.com/topics/research-compendium/" target="_blank">https://github.com/topics/research-compendium/</a> <a href="https://github.com/topics/research-compendium/" target="_blank"><span id="hits_github" class="count">..</span></a></li>
         <li><strong>Zenodo</strong> &middot; <a href="https://zenodo.org/communities/research-compendium/" target="_blank">https://zenodo.org/communities/research-compendium/</a> <a href="https://zenodo.org/communities/research-compendium/" target="_blank"><span id="hits_zenodo" class="count">..</span></a></li>
         <li><strong>OSF</strong> &middot; <a href="https://osf.io/search/?q=tags:research-compendium" target="_blank">https://osf.io/search/?q=tags:research-compendium</a> <a href="https://osf.io/search/?q=tags:research-compendium" target="_blank"><span id="hits_osf" class="count">..</span></a></li>
-        <li><strong>GitLab</strong> &middot; <a href="https://gitlab.com/search?search=research%20compendium" target="_blank">https://gitlab.com/search?search=research-compendium</a> <a href="https://gitlab.com/search?search=research-compendiu" target="_blank"><span id="hits_gitlab" class="count">..</span></a></li>
+        <li><strong>GitLab</strong> &middot; <a href="https://gitlab.com/search?search=research-compendium" target="_blank">https://gitlab.com/search?search=research-compendium</a> <a href="https://gitlab.com/search?search=research-compendium" target="_blank"><span id="hits_gitlab" class="count">..</span></a></li>
+        <li><strong>Figshare</strong> &middot; <a href="https://figshare.com/search?q=%3Akeyword%3A%20research%20compendium" target="_blank">https://figshare.com/search?q=:keyword: research compendium</a></li>
       </ul>
 
       <p>You may also follow the publication of research compendia and the discussion around the concept on Twitter under the hashtag <a href="https://twitter.com/hashtag/researchcompendium?src=hash" title="Hashtag on Twitter"><strong>#researchcompendium</strong></a>.</p>
@@ -96,77 +97,78 @@
   </script>
 
   <script>
-      var request_github = new XMLHttpRequest();
-      request_github.open('GET', 'https://api.github.com/search/repositories?q=topic:research-compendium&per_page=1', true);
-  
-      request_github.onload = function() {
-        if (request_github.status >= 200 && request_github.status < 400) {
-          var data = JSON.parse(request_github.responseText);
-          hits_github = data.total_count;
-          console.log('Retrieved compendium count from GitHub: ' + hits_github);
-  
-          el = document.getElementById('hits_github');
-          el.textContent = hits_github;
-        } else {
-          console.log('Error getting compendium count from GitHub', request_github.status);
-        }
-      };
-  
-      request_github.onerror = function() {
-        console.log('Error getting compendium count from GitHub');
-      };
-  
-      request_github.send();
-    </script>
+    var request_github = new XMLHttpRequest();
+    request_github.open('GET', 'https://api.github.com/search/repositories?q=topic:research-compendium&per_page=1', true);
 
-    <script>
-      // https://api.osf.io/v2/nodes/?filter%5Btags%5D=research-compendium
-      var request_osf = new XMLHttpRequest();
-      request_osf.open('GET', 'https://cors-anywhere.herokuapp.com/https://api.osf.io/v2/nodes/?fields%5Bnodes%5D=id&filter%5Btags%5D=research-compendium&format=json', true);
-    
-      request_osf.onload = function() {
-        if (request_osf.status >= 200 && request_osf.status < 400) {
-          var data = JSON.parse(request_osf.responseText);
-          hits_osf = data.links.meta.total;
+    request_github.onload = function() {
+      if (request_github.status >= 200 && request_github.status < 400) {
+        var data = JSON.parse(request_github.responseText);
+        hits_github = data.total_count;
+        console.log('Retrieved compendium count from GitHub: ' + hits_github);
 
-          console.log('Retrieved compendium count from OSF: ' + hits_osf);
+        el = document.getElementById('hits_github');
+        el.textContent = hits_github;
+      } else {
+        console.log('Error getting compendium count from GitHub', request_github.status);
+      }
+    };
+
+    request_github.onerror = function() {
+      console.log('Error getting compendium count from GitHub');
+    };
+
+    request_github.send();
+  </script>
+
+  <script>
+    // https://api.osf.io/v2/nodes/?filter%5Btags%5D=research-compendium
+    var request_osf = new XMLHttpRequest();
+    request_osf.open('GET', 'https://cors-anywhere.herokuapp.com/https://api.osf.io/v2/nodes/?fields%5Bnodes%5D=id&filter%5Btags%5D=research-compendium&format=json', true);
   
-          el = document.getElementById('hits_osf');
-          el.textContent = hits_osf;
-        } else {
-          console.log('Error getting compendium count from OSF', request_osf.status);
-        }
-      };
-  
-      request_osf.onerror = function() {
-        console.log('Error getting compendium count from OSF');
-      };
-  
-      request_osf.send();
-    </script>
-    <script>
-      var request_gitlab = new XMLHttpRequest();
-      request_gitlab.open('GET', 'https://gitlab.com/api/v4/projects?search=research compendium', true);
+    request_osf.onload = function() {
+      if (request_osf.status >= 200 && request_osf.status < 400) {
+        var data = JSON.parse(request_osf.responseText);
+        hits_osf = data.links.meta.total;
 
-      request_gitlab.onload = function() {
-        if (request_gitlab.status >= 200 && request_gitlab.status < 400) {
-          hits_gitlab = request_gitlab.getResponseHeader('X-Total');
+        console.log('Retrieved compendium count from OSF: ' + hits_osf);
 
-          console.log('Retrieved compendium count from GitLab: ' + hits_gitlab);
+        el = document.getElementById('hits_osf');
+        el.textContent = hits_osf;
+      } else {
+        console.log('Error getting compendium count from OSF', request_osf.status);
+      }
+    };
 
-          el = document.getElementById('hits_gitlab');
-          el.textContent = hits_gitlab;
-        } else {
-          console.log('Error getting compendium count from GitLab', request_gitlab.status);
-        }
-      };
+    request_osf.onerror = function() {
+      console.log('Error getting compendium count from OSF');
+    };
 
-      request_gitlab.onerror = function() {
-        console.log('Error getting compendium count from GitLab');
-      };
+    request_osf.send();
+  </script>
 
-      request_gitlab.send();
-    </script>
+  <script>
+    var request_gitlab = new XMLHttpRequest();
+    request_gitlab.open('GET', 'https://gitlab.com/api/v4/projects?search=research compendium', true);
+
+    request_gitlab.onload = function() {
+      if (request_gitlab.status >= 200 && request_gitlab.status < 400) {
+        hits_gitlab = request_gitlab.getResponseHeader('X-Total');
+
+        console.log('Retrieved compendium count from GitLab: ' + hits_gitlab);
+
+        el = document.getElementById('hits_gitlab');
+        el.textContent = hits_gitlab;
+      } else {
+        console.log('Error getting compendium count from GitLab', request_gitlab.status);
+      }
+    };
+
+    request_gitlab.onerror = function() {
+      console.log('Error getting compendium count from GitLab');
+    };
+
+    request_gitlab.send();
+  </script>
 
 </body>
 </html>
