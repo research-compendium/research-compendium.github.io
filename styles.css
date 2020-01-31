@@ -35,13 +35,22 @@ html, body {
 
 h1 {
 	font-family:Georgia, serif;
-	font-weight:lighter;
+	font-size:2em;
+  font-weight:lighter;
+}
+
+h2 {
+	font-family:Georgia, serif;
+	font-weight:bold;
+	font-size:1.3em;
+  padding-top: 10px;
+  margin: 0px;
 }
 
 h3 {
 	font-family:Georgia, serif;
-	font-weight:lighter;
-	font-size:1.3em;
+	font-weight:bold;
+	font-size:1.1em;
   padding-top: 10px;
   margin: 0px;
 }
